@@ -1,5 +1,4 @@
 ---
----
 - name: list deploypath
   shell: ls -1 /opt/tomcat/webapps/
   register: contents
