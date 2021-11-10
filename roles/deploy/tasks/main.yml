@@ -48,3 +48,14 @@
     remote_src: yes
   with_items:
     - "{{ package }}"
+
+- name: cleanup remote
+  file:
+    path: "{{ tmp_path }}/"
+    state: absent
+ 
+- name: cleanup local
+  file:
+    path: "{{ tmp_path }}/"
+    state: absent
+  delegate_to: localhost
