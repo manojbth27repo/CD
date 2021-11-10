@@ -34,20 +34,25 @@
 - name: list deploypath
   shell: "ls -1 {{ deploypath }}"
   register: contents
+  become: yes
 
 - name: remove
   file: 
-    path: "/opt/tomcat/webapps/{{ item }}" 
+    path: "{{ deploypath }}/{{ item }}" 
     state: absent
   with_items: "{{ contents.stdout_lines }}"
+  become: yes
 
 - name: deploy war file
   copy:
     src: "{{ tmp_path }}/{{ item }}"
     dest: "{{ deploypath }}"
     remote_src: yes
+    owner: tomcat
+    group: tomcat
   with_items:
     - "{{ package }}"
+  become: yes
 
 - name: cleanup remote
   file:

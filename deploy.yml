@@ -1,6 +1,6 @@
   
 ---
-- hosts: "{{ NODE }}"
+- hosts: app
 #  become: true
 #  become_method: sudo
   roles:
