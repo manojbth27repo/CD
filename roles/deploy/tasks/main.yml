@@ -1,4 +1,36 @@
 ---
+- name: Create tmp_path directory on localhost
+  file:
+    path: "{{ tmp_path }}"
+    state: directory
+    mode: 0775
+    recurse: true
+  delegate_to: localhost
+
+- name: deploy war file
+  get_url:
+    url: "{{ nexus_url }}"
+    dest: "{{ tmp_path }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    force: yes
+  delegate_to: localhost
+
+- name: Create tmp_path directory on localhost
+  file:
+    path: "{{ tmp_path }}"
+    state: directory
+    mode: 0775
+    recurse: true
+ 
+# Copy Packages to app hosts
+- name: Copy RPMs and conf files to the app servers
+  copy:
+    src: "{{ tmp_path }}/"
+    dest: "{{ tmp_path }}/" 
+    force: yes 
+  become: yes
+ 
 - name: list deploypath
   shell: "ls -1 {{ deploypath }}"
   register: contents
@@ -10,9 +42,9 @@
   with_items: "{{ contents.stdout_lines }}"
 
 - name: deploy war file
-  get_url:
-    url: "{{nexus_url}}"
+  copy:
+    src: "{{ tmp_path }}/{{ item }}"
     dest: "{{ deploypath }}"
-    username: "{{username}}"
-    password: "{{password}}"
-
+    remote_src: yes
+  with_items:
+    - "{{ package }}"
