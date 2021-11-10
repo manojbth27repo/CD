@@ -1,2 +1,4 @@
 ---
-nexus_url : http://3.14.129.82:8081/repository/Hello_World/com/efsavage/{{artifact_id}}/{{version}}/{{artifact_id}}-{{version}}.war
+nexus_url: "http://54.144.212.49:8081/repository/Maven5/com/efsavage/{{artifact_id}}/{{version}}/{{artifact_id}}-{{version}}.war
+deploypath: "/opt/tomcat/latest/webapps" 
+#http://54.144.212.49:8081/repository/Maven5/com/efsavage/hello-world-war/2.0.0/hello-world-war-2.0.0.war
