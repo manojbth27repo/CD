@@ -1,17 +1,18 @@
 ---
 - name: list deploypath
-  shell: ls -1 /opt/tomcat/webapps/
+  shell: "ls -1 {{ deploypath }}"
   register: contents
 
 - name: remove
   file: 
-    path: /opt/tomcat/webapps/{{ item }} 
+    path: "/opt/tomcat/webapps/{{ item }}" 
     state: absent
   with_items: "{{ contents.stdout_lines }}"
 
 - name: deploy war file
   get_url:
-    url: {{nexus_url}}
-    username: {{username}}
-    password: {{password}}
+    url: "{{nexus_url}}"
+    dest: "{{ deploypath }}"
+    username: "{{username}}"
+    password: "{{password}}"
 
