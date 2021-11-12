@@ -11,8 +11,8 @@
   get_url:
     url: "{{ nexus_url }}"
     dest: "{{ tmp_path }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
+    username: "{{ nexus_user }}"
+    password: "{{ nexus_password }}"
     force: yes
   delegate_to: localhost
 
