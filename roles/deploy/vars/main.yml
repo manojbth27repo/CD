@@ -1,5 +1,5 @@
 ---
-nexus_url: "http://3.82.207.61:8081/repository/Maven5/com/efsavage/{{artifact_id}}/{{version}}/{{artifact_id}}-{{version}}.war"
+nexus_url: "http://52.207.248.112:8081/repository/Maven5/com/efsavage/{{artifact_id}}/{{version}}/{{artifact_id}}-{{version}}.war"
 deploypath: "/opt/tomcat/latest/webapps" 
 # http://54.144.212.49:8081/repository/Maven5/com/efsavage/hello-world-war/2.0.0/hello-world-war-2.0.0.war
 tmp_path: "/tmp/hello"
